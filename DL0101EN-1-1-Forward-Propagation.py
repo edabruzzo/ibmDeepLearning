@@ -76,6 +76,37 @@ class Teste1(object):
         return 1.0 / (1.0 + np.exp(-1 * weighted_sum))
 
 
+    def forward_propagate(self, network, inputs):
+
+        layer_inputs = list(inputs)  # start with the input layer as the input to the first hidden layer
+
+        for layer in network:
+
+            layer_data = network[layer]
+
+            layer_outputs = []
+
+            for layer_node in layer_data:
+
+                node_data = layer_data[layer_node]
+
+                # compute the weighted sum and the output of each node at the same time
+                node_output = self.node_activation(
+                    self.compute_weighted_sum(layer_inputs, node_data['weights'], node_data['bias']))
+
+                layer_outputs.append(np.around(node_output[0], decimals=4))
+
+            if layer != 'output':
+                print('The outputs of the nodes in hidden layer number {} is {}'.format(layer.split('_')[1],
+                                                                                        layer_outputs))
+
+            layer_inputs = layer_outputs  # set the output of this layer to be the input to next layer
+
+        network_predictions = layer_outputs
+
+        return network_predictions
+
+
 from random import seed
 
 
@@ -105,11 +136,20 @@ if __name__ == '__main__':
      
      '''
 
-     activation_sigmoid = Teste1().node_activation(compute_weighted_sum(inputs,
-                                   weight = network['layer_1']['node_1']['weights'], # weights
+     activation_sigmoid = Teste1().node_activation(Teste1().compute_weighted_sum(inputs,
+                                   weights = network['layer_1']['node_1']['weights'], # weights
                                    bias = network['layer_1']['node_1']['bias']))
 
 
      print(activation_sigmoid)
+
+     ### type your answser here
+     predictions = Teste1().forward_propagate(network, inputs)
+
+     my_network = Teste1().configure_network_many_hidden_layers(5, 3, [2, 3, 2], 3)
+     inputs = np.around(np.random.uniform(size=5), decimals=2)
+
+     predictions = Teste1().forward_propagate(my_network, inputs)
+     print('The predicted values by the network for the given input are {}'.format(predictions))
 
 
