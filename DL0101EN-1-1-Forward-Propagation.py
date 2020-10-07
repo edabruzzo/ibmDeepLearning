@@ -155,8 +155,11 @@ if __name__ == '__main__':
      print('The predicted values by the network for the given input are {}'.format(predictions))
      
      '''
-
-     my_network_2 = Teste1().configure_network_many_hidden_layers(7, 4, [3, 5, 3, 4], 5)
      inputs_2 = np.around(np.random.uniform(size=7), decimals=2)
+     num_inputs = inputs_2.size # to enforce that the num_inputs has the size of the inputs tuple
+     num_hidden_layers = 4
+     num_nodes_hidden = [1, 2, 3, 4] #here the number of elements in the list have to match the number of hidden layers
+     num_nodes_output = 1
+     my_network_2 = Teste1().configure_network_many_hidden_layers(num_inputs, num_hidden_layers, num_nodes_hidden, num_nodes_output)
      predictions_2 = Teste1().forward_propagate(my_network_2, inputs_2)
      print('The predicted values by the network for the given input are {}'.format(predictions_2))
