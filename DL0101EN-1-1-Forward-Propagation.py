@@ -143,13 +143,20 @@ if __name__ == '__main__':
 
      print(activation_sigmoid)
 
+
+
+     '''
      ### type your answser here
      predictions = Teste1().forward_propagate(network, inputs)
 
      my_network = Teste1().configure_network_many_hidden_layers(5, 3, [2, 3, 2], 3)
      inputs = np.around(np.random.uniform(size=5), decimals=2)
-
      predictions = Teste1().forward_propagate(my_network, inputs)
      print('The predicted values by the network for the given input are {}'.format(predictions))
+     
+     '''
 
-
+     my_network_2 = Teste1().configure_network_many_hidden_layers(7, 4, [3, 5, 3, 4], 5)
+     inputs_2 = np.around(np.random.uniform(size=7), decimals=2)
+     predictions_2 = Teste1().forward_propagate(my_network_2, inputs_2)
+     print('The predicted values by the network for the given input are {}'.format(predictions_2))
